@@ -34,7 +34,6 @@ df = load_data()
 # Function to preprocess user input
 def preprocess_input(input_data):
     # Create a DataFrame with the same columns as our training data
-    # We'll need to match this to your model's expected features
     X_columns = df.drop('target', axis=1).columns
 
     # Create empty DataFrame with matching columns
@@ -123,8 +122,8 @@ elif page == "Prediction":
     thal_mapping = {"Normal": 1, "Fixed Defect": 2, "Reversible Defect": 3}
     thal_encoded = thal_mapping[thal]
 
-    # Normalize the numerical features (as done in your preprocessing step)
-    # These min-max ranges should match your training data
+    # Normalize the numerical features (as done in the preprocessing step)
+    # These min-max ranges
     age_norm = (age - 29) / (77 - 29)
     trestbps_norm = (trestbps - 94) / (200 - 94)
     chol_norm = (chol - 126) / (564 - 126)
@@ -132,13 +131,10 @@ elif page == "Prediction":
     oldpeak_norm = oldpeak / 6.2
     ca_norm = ca / 4
 
-    # Create input data in the same format as your model expects
+    # Create input data in the same format as our model expects
     input_data = [age_norm, sex_encoded, cp_encoded, trestbps_norm, chol_norm,
                   fbs_encoded, restecg_encoded, thalach_norm, exang_encoded,
                   oldpeak_norm, slope_encoded, ca_norm, thal_encoded]
-
-    # Make sure the input data matches your model's feature expectations
-    # You might need to adjust this based on how one-hot encoding was applied
 
     # Predict button
     if st.button("Predict"):
